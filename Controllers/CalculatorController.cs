@@ -1,7 +1,3 @@
-namespace CalculatorApi.Controllers;
-
-public class CalculatorController
-{
 using Microsoft.AspNetCore.Mvc;
 
 namespace CalculatorApi.Controllers;
@@ -35,6 +31,4 @@ public class CalculatorController : ControllerBase
             return BadRequest("Parameter 'b' must not be zero.");
         return Ok(a / b);
     }
-}
-
 }
