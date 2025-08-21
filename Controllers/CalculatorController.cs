@@ -1,34 +1,40 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace CalculatorApi.Controllers;
-
-[ApiController]
-[Route("api/[controller]")]
-public class CalculatorController : ControllerBase
+namespace Calculator_API.Controllers
 {
-    [HttpGet("sum")]
-    public ActionResult<double> Sum([FromQuery] double a, [FromQuery] double b)
+    [Route("api/[controller]")]
+    [ApiController] 
+    public class CalculatorController : Controller
     {
-        return Ok(a + b);
-    }
+        [HttpGet("sum")]
+        public IActionResult GetSum([FromQuery] int a, [FromQuery] int b)
+        {
+            var result = a + b;
+            return Ok(new { a, b, result });
+        }
 
-    [HttpGet("subtract")]
-    public ActionResult<double> Subtract([FromQuery] double a, [FromQuery] double b)
-    {
-        return Ok(a - b);
-    }
+        [HttpGet("subtract")]
+        public IActionResult GetSubtract([FromQuery] int a, [FromQuery] int b)
+        {
+            var result = a - b;
+            return Ok(new { a, b, result });
+        }
 
-    [HttpGet("multiply")]
-    public ActionResult<double> Multiply([FromQuery] double a, [FromQuery] double b)
-    {
-        return Ok(a * b);
-    }
+        [HttpGet("multiply")]
+        public IActionResult GetMultiply([FromQuery] int a, [FromQuery] int b)
+        {
+            var result = a * b;
+            return Ok(new { a, b, result });
+        }
 
-    [HttpGet("divide")]
-    public ActionResult<double> Divide([FromQuery] double a, [FromQuery] double b)
-    {
-        if (b == 0)
-            return BadRequest("Parameter 'b' must not be zero.");
-        return Ok(a / b);
+        [HttpGet("divide")]
+        public IActionResult GetDivide([FromQuery] int a, [FromQuery] int b)
+        {
+            if (b == 0)
+                return BadRequest("No se puede dividir entre cero.");
+
+            var result = (double)a / b;
+            return Ok(new { a, b, result });
+        }
     }
 }
